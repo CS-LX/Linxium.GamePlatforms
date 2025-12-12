@@ -1,0 +1,24 @@
+{
+  "name": "com.linxium.game-platforms",
+  "version": "1.0.0",
+  "displayName": "LXLib-Game Platforms",
+  "description": "",
+  "unity": "6000.2",
+  "author": {
+    "name": "Linxium",
+    "email": "1659404657@qq.com",
+    "url": "https://github.com/CS-LX/Linxium.GamePlatforms"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.linxium.extra-components": "https://github.com/CS-LX/Linxium.ExtraComponents.git",
+    "com.rlabrecque.steamworks.net": "https://github.com/rlabrecque/Steamworks.NET.git?path=/com.rlabrecque.steamworks.net",
+    "com.google.external-dependency-manager": "1.2.186",
+    "com.unity.nuget.newtonsoft-json":"3.2.1",
+    "com.taptap.sdk.achievement": "https://github.com/taptap/tapsdk-unity-dist.git?path=/Achievement#4.8.3",
+    "com.taptap.sdk.core": "https://github.com/taptap/tapsdk-unity-dist.git?path=/Core#4.8.3",
+    "com.taptap.sdk.login": "https://github.com/taptap/tapsdk-unity-dist.git?path=/Login#4.8.3",
+    "com.taptap.sdk.update": "https://github.com/taptap/tapsdk-unity-dist.git?path=/Update#4.8.3"
+  }
+}

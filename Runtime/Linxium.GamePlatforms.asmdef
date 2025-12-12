@@ -1,0 +1,22 @@
+{
+    "name": "Linxium.GamePlatforms",
+    "rootNamespace": "Linxium.GamePlatforms",
+    "references": [
+        "Linxium.ExtraComponents",
+        "com.rlabrecque.steamworks.net",
+        "UniTask",
+        "TapSDK.Achievement.Runtime",
+        "TapSDK.Core.Runtime",
+        "TapSDK.Login.Runtime",
+        "TapSDK.Update.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
