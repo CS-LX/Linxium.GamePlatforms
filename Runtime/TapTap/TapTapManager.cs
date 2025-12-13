@@ -40,10 +40,9 @@ public abstract class TapTapManager : AdvancedMonoSingleton<TapTapManager>, IGam
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor) {
             bool isSuccess = await TapTapSDK.IsLaunchedFromTapTapPC();
             if (!isSuccess) {
-                Debug.Log("[TapTapManager] TapTap PC 端校验未通过");
+                HandleWarring("[TapTapManager] TapTap PC 端校验未通过");
                 return;
             }
-            Debug.Log("[TapTapManager] TapTap PC 端校验通过");
         }
         //登录
         // 定义授权范围
@@ -53,12 +52,12 @@ public abstract class TapTapManager : AdvancedMonoSingleton<TapTapManager>, IGam
         try {
             var userInfo = await TapTapLogin.Instance.LoginWithScopes(scopes.ToArray());
         }
-        catch (TaskCanceledException) {
-            Debug.Log("[TapTapManager] 用户取消登录");
+        catch (TaskCanceledException taskCanceledException) {
+            HandleException(taskCanceledException, "[TapTapManager] 用户取消登录");
             //await MessageDialog.Show("提示", "不登陆会导致无法解锁成就（实际上登录只是为了解锁成就用的喵qwq）");
         }
         catch (Exception exception) {
-            Debug.LogException(exception);
+            HandleException(exception);
             //await MessageDialog.Show("登录失败，出现异常", $"{exception}", MessageDialog.ButtonSet.OK, true);
         }
         // 发起 Tap 登录
@@ -68,9 +67,18 @@ public abstract class TapTapManager : AdvancedMonoSingleton<TapTapManager>, IGam
             TapTapUpdate.CheckForceUpdate();
         }
         catch (Exception e) {
-            Debug.LogWarning("[TapTapManager] 检查更新失败" + e);
+            HandleWarring("[TapTapManager] 检查更新失败" + e);
         }
         isInitialized = true;
+    }
+
+    public virtual void HandleWarring(string message) {
+        Debug.LogWarning(message);
+    }
+
+    public virtual void HandleException(Exception exception, string message = "") {
+        if (exception is OperationCanceledException) Debug.LogWarning(message);
+        else Debug.LogError(message);
     }
 
     public virtual void Uninitialize() {
