@@ -53,11 +53,11 @@ public abstract class TapTapManager : AdvancedMonoSingleton<TapTapManager>, IGam
             var userInfo = await TapTapLogin.Instance.LoginWithScopes(scopes.ToArray());
         }
         catch (TaskCanceledException taskCanceledException) {
-            HandleException(taskCanceledException, "[TapTapManager] 用户取消登录");
+            await HandleExceptionAsync(taskCanceledException, "[TapTapManager] 用户取消登录");
             //await MessageDialog.Show("提示", "不登陆会导致无法解锁成就（实际上登录只是为了解锁成就用的喵qwq）");
         }
         catch (Exception exception) {
-            HandleException(exception);
+            await HandleExceptionAsync(exception);
             //await MessageDialog.Show("登录失败，出现异常", $"{exception}", MessageDialog.ButtonSet.OK, true);
         }
         // 发起 Tap 登录
@@ -79,6 +79,14 @@ public abstract class TapTapManager : AdvancedMonoSingleton<TapTapManager>, IGam
     public virtual void HandleException(Exception exception, string message = "") {
         if (exception is OperationCanceledException) Debug.LogWarning(message);
         else Debug.LogError(message);
+    }
+
+    public virtual async UniTask HandleExceptionAsync(Exception exception, string message = "") {
+        if (exception is OperationCanceledException) {
+            Debug.LogWarning(message);
+            return;
+        }
+        Debug.LogError(message);
     }
 
     public virtual void Uninitialize() {
