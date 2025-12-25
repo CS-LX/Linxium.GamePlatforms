@@ -33,11 +33,9 @@ namespace Linxium.GamePlatforms.Extensions {
         /// 是否为移动平台
         /// </summary>
         public static bool IsMobile(this RuntimePlatform platform) {
-            return platform switch {
-                RuntimePlatform.IPhonePlayer => true,
-                RuntimePlatform.Android => true,
-                RuntimePlatform.tvOS => true,
-                RuntimePlatform.Switch => true,
+            return Application.platform switch {
+                RuntimePlatform.IPhonePlayer or RuntimePlatform.Android or RuntimePlatform.VisionOS => true,
+                RuntimePlatform.MetroPlayerX86 or RuntimePlatform.MetroPlayerX64 or RuntimePlatform.MetroPlayerARM => SystemInfo.deviceType == DeviceType.Handheld,
                 _ => false
             };
         }
